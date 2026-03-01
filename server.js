@@ -37,14 +37,10 @@ function parseXMLTV(xmlStr) {
 }
 
 function applyHDPlusTransform(epg) {
-  const channelIdMap = new Map();
-
   const channels = epg.channels.map((ch) => {
     const id = ch['@_id'] || '';
     if (id.includes('.HD.')) {
-      const newId = id.replace('.HD.', '.HD+.');
-      channelIdMap.set(id, newId);
-      const newCh = { ...ch, '@_id': newId };
+      const newCh = { ...ch };
       if (newCh['display-name']) {
         newCh['display-name'] = newCh['display-name'].map((dn) => {
           if (typeof dn === 'string') {
@@ -64,15 +60,7 @@ function applyHDPlusTransform(epg) {
     return ch;
   });
 
-  const programmes = epg.programmes.map((prog) => {
-    const chRef = prog['@_channel'] || '';
-    if (channelIdMap.has(chRef)) {
-      return { ...prog, '@_channel': channelIdMap.get(chRef) };
-    }
-    return prog;
-  });
-
-  return { channels, programmes };
+  return { channels, programmes: epg.programmes };
 }
 
 function mergeEPGs(epgList) {
