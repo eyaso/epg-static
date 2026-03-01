@@ -1,13 +1,11 @@
 {
   "name": "epg-merger",
   "version": "1.0.0",
-  "description": "Minimal EPG merger service - fetches, merges and serves XMLTV with HD+ transform",
-  "main": "server.js",
+  "description": "Daily EPG merger - fetches, merges and transforms XMLTV sources via GitHub Actions",
   "scripts": {
-    "start": "node server.js"
+    "build": "node build.js"
   },
   "dependencies": {
-    "express": "^4.21.0",
     "fast-xml-parser": "^4.5.0"
   }
 }
