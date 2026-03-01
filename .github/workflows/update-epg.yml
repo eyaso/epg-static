@@ -29,4 +29,5 @@ jobs:
           git add epg.xml.gz
           git diff --staged --quiet && echo "No changes" && exit 0
           git commit -m "update epg $(date -u +%Y-%m-%d)"
+          git pull --rebase
           git push
